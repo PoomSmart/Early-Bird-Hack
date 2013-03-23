@@ -1,0 +1,9 @@
+Package: com.PS.EarlyBirdHack
+Name: Early Bird Hack
+Depends: mobilesubstrate, preferenceloader
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Hack Early Bird!
+Author: PoomSmart
+Section: iMods
+Icon: file:///Library/PreferenceBundles/EarlyBirdSettings.bundle/EBHack@2x.png

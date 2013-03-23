@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>title</key>
+    <string>Early Bird Hack</string>
+    <key>entry</key>
+    <dict>
+      <key>cell</key>
+      <string>PSLinkCell</string>
+      <key>icon</key>
+      <string>EBHack.png</string>
+      <key>label</key>
+      <string>Early Bird Hack</string>
+    </dict>
+    <key>items</key>
+    <array>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>label</key>
+        <string>Bird Hacks</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>unlimitedSwipe</string>
+        <key>label</key>
+        <string>Unlimited Swipes</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+       <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>noDie</string>
+        <key>label</key>
+        <string>No Die</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+       <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>label</key>
+        <string>Score Hacks</string>
+        <key>footerText</key>
+        <string>*Multiplied by any Scores and Bonuses in Game.
+You shouldn't set this too high.</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>fixedScore</string>
+        <key>label</key>
+        <string>Fixed Score</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+       <dict>
+		<key>cell</key>
+		<string>PSEditTextCell</string>
+		<key>detail</key>
+		<string>PSDetailController</string>
+		<key>defaults</key>
+		<string>com.PS.EarlyBirdHack</string>
+		<key>key</key>
+		<string>fixedScoreValue</string>
+		<key>label</key>
+		<string>Value</string>
+		<key>placeholder</key>
+		<string>Enter score</string>
+		<key>isNumeric</key>
+		<true/>
+		<key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+	   </dict>
+	   <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>multiplierScore</string>
+        <key>label</key>
+        <string>Multiple Score*</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+       <dict>
+		<key>cell</key>
+		<string>PSEditTextCell</string>
+		<key>detail</key>
+		<string>PSDetailController</string>
+		<key>defaults</key>
+		<string>com.PS.EarlyBirdHack</string>
+		<key>key</key>
+		<string>multiplierValue</string>
+		<key>label</key>
+		<string>Value</string>
+		<key>placeholder</key>
+		<string>Enter multiplier</string>
+		<key>isNumeric</key>
+		<true/>
+		<key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+	   </dict>
+       <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>label</key>
+        <string>World Hacks</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <true/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>iCy</string>
+        <key>label</key>
+        <string>Grounds are icy ?</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>label</key>
+        <string>Gameplay Hacks</string>
+        <key>footerText</key>
+        <string>*Coundown time when Phoenix is activated.
+**For BlueBird in Zones select page.
+***Will show at bottom-left of the screen.</string>
+      </dict>
+       <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>alwaysWin</string>
+        <key>label</key>
+        <string>Always Win</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>phoenixTimeFreeze</string>
+        <key>label</key>
+        <string>Freeze Time* (Phoenix)</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>staticBird</string>
+        <key>label</key>
+        <string>No Jump and Land**</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+       <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>showFPS</string>
+        <key>label</key>
+        <string>Show FPS***</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>label</key>
+        <string>System Hacks</string>
+        <key>footerText</key>
+        <string>*Somehow remove Jailbreak detection in Game.</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSSwitchCell</string>
+        <key>default</key>
+        <false/>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>noJB</string>
+        <key>label</key>
+        <string>No Jailbreak*</string>
+        <key>PostNotification</key>
+        <string>com.PS.EarlyBirdHack.settingschanged</string>
+      </dict>
+      <dict>
+        <key>cell</key>
+        <string>PSGroupCell</string>
+        <key>footerText</key>
+        <string>Created by PoomSmart</string>
+      </dict>
+    </array>
+  </dict>
+</plist>

@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = "EarlyBirdHackSettings";
+		cell = PSLinkCell;
+		detail = "EBHackPreferenceController";
+		icon = "EBHack.png";
+		isController = 1;
+		label = "Early Bird Hack";
+	};
+}
