@@ -6,4 +6,4 @@ Architecture: iphoneos-arm
 Description: Hack Early Bird!
 Author: PoomSmart
 Section: iMods
-Icon: file:///Library/PreferenceBundles/EarlyBirdSettings.bundle/EBHack@2x.png
+Icon: file:///Library/PreferenceBundles/EarlyBirdHackSettings.bundle/EBHack@2x.png
