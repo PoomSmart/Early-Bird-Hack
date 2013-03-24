@@ -1,5 +1,5 @@
 #import "substrate.h"
-static BOOL UnlimitedSwipe; // move from gameplay
+static BOOL UnlimitedSwipe;
 static BOOL NoDie;
 
 static BOOL FixedScore;
@@ -13,6 +13,7 @@ static BOOL PhoenixTimeFreeze;
 static BOOL StaticBird;
 static BOOL ShowFPS;
 static BOOL AlwaysWin;
+static BOOL HideMT2;
 
 static BOOL NoJB;
 
@@ -216,6 +217,18 @@ static BOOL NoJB;
 
 %group gameplay
 
+%hook AppDelegate
+
+- (BOOL)isMyTown2Installed
+{
+	if (HideMT2)
+		return YES;
+	else
+		return %orig;
+}
+
+%end
+
 %hook Ruckus_Game
 
 - (BOOL)didWin
@@ -364,6 +377,7 @@ static void loadHacks()
 	id staticbird = [dict objectForKey:@"staticBird"];
 	id showfps = [dict objectForKey:@"showFPS"];
 	id alwayswin = [dict objectForKey:@"alwaysWin"];
+	id hidemt2 = [dict objectForKey:@"hideMT2"];
 	
 	id nojb = [dict objectForKey:@"noJB"];
 	
@@ -387,6 +401,7 @@ static void loadHacks()
 	StaticBird = staticbird ? [staticbird boolValue] : YES;
 	ShowFPS = showfps ? [showfps boolValue] : YES;
 	AlwaysWin = alwayswin ? [alwayswin boolValue] : YES;
+	HideMT2 = hidemt2 ? [hidemt2 boolValue] : YES;
 	
 	NoJB = nojb ? [nojb boolValue] : YES;
 
