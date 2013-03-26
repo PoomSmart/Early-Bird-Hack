@@ -14,6 +14,7 @@ static BOOL StaticBird;
 static BOOL ShowFPS;
 static BOOL AlwaysWin;
 static BOOL HideMT2;
+static BOOL NoPopUp;
 
 static BOOL NoJB;
 
@@ -23,133 +24,63 @@ static BOOL NoJB;
 
 - (BOOL)outOfSwipes
 {
-	if (UnlimitedSwipe)
+	// Shorten the code
+	return UnlimitedSwipe ? NO : %orig;
+	/*if (UnlimitedSwipe) // For reference
 		return NO;
 	else
-		return %orig;
+		return %orig;*/
 }
 
-- (void)animDie
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)animDie { if (NoDie); else %orig; }
 
-- (void)animBigImpact
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)animBigImpact {	if (NoDie); else %orig; }
 
 %end
 
 %hook Ruckus_Phoenix
 
-- (BOOL)outOfSwipes
-{
-	if (UnlimitedSwipe)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)outOfSwipes { return UnlimitedSwipe ? NO : %orig; }
 
-- (BOOL)canDieFromThornsAndLightning
-{
-	if (NoDie)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)canDieFromThornsAndLightning { return NoDie ? NO : %orig; }
 
-- (void)animDie
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)animDie { if (NoDie); else %orig; }
 
-- (void)animBigImpact
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)animBigImpact {	if (NoDie); else %orig; }
+
+- (void)checkStuck { if (NoDie); else %orig; }
 
 %end
 
 %hook Ruckus_Character
 
-- (int)usedSwipes
-{
-	if (UnlimitedSwipe)
-		return 0;
-	else
-		return %orig;
-}
+- (int)usedSwipes {	return UnlimitedSwipe ? 0 : %orig; }
 
-- (BOOL)alive
-{
-	if (NoDie)
-		return YES;
-	else
-		return %orig;
-}
+- (BOOL)alive {	return NoDie ? YES : %orig; }
 
-- (BOOL)outOfSwipes
-{
-	if (UnlimitedSwipe)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)outOfSwipes { return UnlimitedSwipe ? NO : %orig; }
 
-- (BOOL)canDieFromThornsAndLightning
-{
-	if (NoDie)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)canDieFromThornsAndLightning { return NoDie ? NO : %orig; }
 
-- (void)dieWithVelocity:(float)arg1
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)dieWithVelocity:(float)arg1 { if (NoDie); else %orig; }
 
-- (void)setAlive:(BOOL)arg1
-{
-	if (NoDie) { %orig(YES); }
-	else { %orig; }
-}
+- (void)setAlive:(BOOL)arg1 { if (NoDie) %orig(YES); else %orig; }
 
-- (void)animDie
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)animDie { if (NoDie); else %orig; }
 
-- (void)animBigImpact
-{
-	if (NoDie) { }
-	else { %orig; }
-}
+- (void)animBigImpact {	if (NoDie); else %orig; }
+
+- (void)checkStuck { if (NoDie); else %orig; }
+
+- (void)restartFromStuck { if (NoDie); else %orig; }
 
 %end
 
 %hook Ruckus_GameObject
 
-- (BOOL)instantDeath
-{
-	if (NoDie)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)instantDeath { return NoDie ? NO : %orig; }
 
-- (void)setInstantDeath:(BOOL)arg1
-{
-	if (NoDie) { %orig(NO); }
-	else { %orig; }
-}
+- (void)setInstantDeath:(BOOL)arg1 { if (NoDie) %orig(NO); else %orig; }
 
 %end
 
@@ -160,25 +91,15 @@ static BOOL NoJB;
 
 %hook Ruckus_Ledge
 
-- (BOOL)isIcy
-{
-	if (Icy)
-		return YES;
-	if (!Icy)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)isIcy {
+	if (Icy) return YES;
+	if (!Icy) return NO;
+	else return %orig; }
 
-- (BOOL)isWorldEdge
-{
-	if (Icy)
-		return NO;
-	if (!Icy)
-		return YES;
-	else
-		return %orig;
-}
+- (BOOL)isWorldEdge {
+	if (Icy) return NO;
+	if (!Icy) return YES;
+	else return %orig; }
 
 %end
 
@@ -219,95 +140,84 @@ static BOOL NoJB;
 
 %hook AppDelegate
 
-- (BOOL)isMyTown2Installed
-{
-	if (HideMT2)
-		return YES;
-	else
-		return %orig;
-}
+- (BOOL)isMyTown2Installed { return HideMT2 ? YES : %orig; }
+
+%end
+
+%hook Ruckus_ADManager
+
+- (void)start { if (NoPopUp); else %orig; }
+- (void)showAd { if (NoPopUp); else %orig; }
+
+%end
+
+%hook MPInterstitialAdController
+
+- (void)loadAD { if (NoPopUp); else %orig; }
+
+%end
+
+%hook MPAdManager
+
+- (void)loadAdWithURL:(id)arg1 { if (NoPopUp); else %orig; }
+- (void)setAdView:(id)arg1 { if (NoPopUp); else %orig; }
+- (void)refreshAd { if (NoPopUp); else %orig; }
+
+%end
+
+%hook MRAdView
+
+- (id)initWithFrame:(CGRect)arg1 { return NoPopUp ? nil : %orig; }
+- (id)initWithFrame:(CGRect)arg1 allowsExpansion:(BOOL)arg2 closeButtonStyle:(unsigned int)arg3 placementType:(unsigned int)arg4 { return NoPopUp ? nil : %orig; }
+
+%end
+
+%hook MRAdViewBrowsingController
+
+- (id)initWithAdView:(id)arg1 { return NoPopUp ? nil : %orig; }
+
+%end
+
+%hook MRAdViewDisplayController
+
+- (id)view { return NoPopUp ? nil : %orig; }
+- (void)setView:(id)arg1 { if (NoPopUp); else %orig; }
 
 %end
 
 %hook Ruckus_Game
 
-- (BOOL)didWin
-{
-	if (AlwaysWin)
-		return YES;
-	else
-		return %orig;
-}
+- (BOOL)didWin { return AlwaysWin ? YES : %orig; }
 
-- (unsigned int)score
-{
-	if (FixedScore)
-		return FixedScoreValue;
-	else
-		return %orig;
-}
+- (unsigned int)score { return FixedScore ? FixedScoreValue : %orig; }
 
 %end
 
 %hook Ruckus_HUD
 
-- (void)showNoSwipes
-{
-	if (UnlimitedSwipe) { }
-	else { %orig; }
-}
+- (void)showNoSwipes { if (UnlimitedSwipe); else %orig; }
 
 %end
 
 %hook Ruckus_CircleTimer
 
-- (BOOL)running
-{
-	if (PhoenixTimeFreeze)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)running { return PhoenixTimeFreeze ? NO : %orig; }
 
-- (void)update:(float)arg1
-{
-	if (PhoenixTimeFreeze) { }
-	else { %orig; }
-}
+- (void)update:(float)arg1 { if (PhoenixTimeFreeze); else %orig; }
 
-- (void)start
-{
-	if (PhoenixTimeFreeze) { }
-	else { %orig; }
-}
+- (void)start {	if (PhoenixTimeFreeze); else %orig; }
 
 %end
 
 %hook Ruckus_ZoneSelectBird
 
-- (void)jump
-{
-	if (StaticBird) { }
-	else { %orig; }
-}
+- (void)jump { if (StaticBird); else %orig; }
 
-- (void)jumpDone
-{
-	if (StaticBird) { }
-	else { %orig; }
-}
+- (void)jumpDone { if (StaticBird); else %orig; }
 
-- (void)land
-{
-	if (StaticBird) { }
-	else { %orig; }
-}
+- (void)land { if (StaticBird); else %orig; }
 
-- (void)landDone
-{
-	if (StaticBird) { }
-	else { %orig; }
-}
+- (void)landDone { if (StaticBird); else %orig; }
 
 %end
 
@@ -318,43 +228,21 @@ static BOOL NoJB;
 
 %hook CCDirector
 
-- (BOOL)displayFPS
-{
-	if (ShowFPS)
-		return YES;
-	else
-		return %orig;
-}
+- (BOOL)displayFPS { return ShowFPS ? YES : %orig; }
 
-- (void)setDisplayFPS:(BOOL)arg1
-{ 
-	if (ShowFPS) { %orig(YES); }
-	else { %orig; }
-}
+- (void)setDisplayFPS:(BOOL)arg1 { if (ShowFPS) %orig(YES);	else %orig; }
 
 %end
 
 %hook TapjoyConnect
 
-- (BOOL)isJailBroken
-{
-	if (NoJB)
-		return NO;
-	else
-		return %orig;
-}
+- (BOOL)isJailBroken { return NoJB ? NO : %orig; }
 
 %end
 
 %hook FlurrySession
 
-+ (BOOL)deviceIsJailbroken
-{
-	if (NoJB)
-		return NO;
-	else
-		return %orig;
-}
++ (BOOL)deviceIsJailbroken { return NoJB ? NO : %orig; }
 
 %end
 
@@ -378,6 +266,7 @@ static void loadHacks()
 	id showfps = [dict objectForKey:@"showFPS"];
 	id alwayswin = [dict objectForKey:@"alwaysWin"];
 	id hidemt2 = [dict objectForKey:@"hideMT2"];
+	id nopopup = [dict objectForKey:@"noPopUp"];
 	
 	id nojb = [dict objectForKey:@"noJB"];
 	
@@ -402,6 +291,7 @@ static void loadHacks()
 	ShowFPS = showfps ? [showfps boolValue] : YES;
 	AlwaysWin = alwayswin ? [alwayswin boolValue] : YES;
 	HideMT2 = hidemt2 ? [hidemt2 boolValue] : YES;
+	NoPopUp = nopopup ? [nopopup boolValue] : YES;
 	
 	NoJB = nojb ? [nojb boolValue] : YES;
 
