@@ -1,4 +1,6 @@
-#import "substrate.h"
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+
 static BOOL UnlimitedSwipe;
 static BOOL NoDie;
 
@@ -22,89 +24,127 @@ static BOOL NoJB;
 
 %hook Ruckus_BlueBird
 
-- (BOOL)outOfSwipes
-{
-	// Shorten the code
-	return UnlimitedSwipe ? NO : %orig;
-	/*if (UnlimitedSwipe) // For reference
-		return NO;
-	else
-		return %orig;*/
+- (BOOL)outOfSwipes {
+    return UnlimitedSwipe ? NO : %orig;
 }
 
-- (void)animDie { if (NoDie); else %orig; }
+- (void)animDie {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)animBigImpact {	if (NoDie); else %orig; }
+- (void)animBigImpact {
+    if (NoDie) return;
+    %orig;
+}
 
 %end
 
 %hook Ruckus_Phoenix
 
-- (BOOL)outOfSwipes { return UnlimitedSwipe ? NO : %orig; }
+- (BOOL)outOfSwipes {
+    return UnlimitedSwipe ? NO : %orig;
+}
 
-- (BOOL)canDieFromThornsAndLightning { return NoDie ? NO : %orig; }
+- (BOOL)canDieFromThornsAndLightning {
+    return NoDie ? NO : %orig;
+}
 
-- (void)animDie { if (NoDie); else %orig; }
+- (void)animDie {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)animBigImpact {	if (NoDie); else %orig; }
+- (void)animBigImpact {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)checkStuck { if (NoDie); else %orig; }
+- (void)checkStuck {
+    if (NoDie) return;
+    %orig;
+}
 
 %end
 
 %hook Ruckus_Character
 
-- (int)usedSwipes {	return UnlimitedSwipe ? 0 : %orig; }
+- (int)usedSwipes {
+    return UnlimitedSwipe ? 0 : %orig;
+}
 
-- (BOOL)alive {	return NoDie ? YES : %orig; }
+- (BOOL)alive {
+    return NoDie ? YES : %orig;
+}
 
-- (BOOL)outOfSwipes { return UnlimitedSwipe ? NO : %orig; }
+- (BOOL)outOfSwipes {
+    return UnlimitedSwipe ? NO : %orig;
+}
 
-- (BOOL)canDieFromThornsAndLightning { return NoDie ? NO : %orig; }
+- (BOOL)canDieFromThornsAndLightning {
+    return NoDie ? NO : %orig;
+}
 
-- (void)dieWithVelocity:(float)arg1 { if (NoDie); else %orig; }
+- (void)dieWithVelocity:(CGFloat)velocity {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)setAlive:(BOOL)arg1 { if (NoDie) %orig(YES); else %orig; }
+- (void)setAlive:(BOOL)alive {
+    %orig(NoDie ? YES : alive);
+}
 
-- (void)animDie { if (NoDie); else %orig; }
+- (void)animDie {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)animBigImpact {	if (NoDie); else %orig; }
+- (void)animBigImpact {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)checkStuck { if (NoDie); else %orig; }
+- (void)checkStuck {
+    if (NoDie) return;
+    %orig;
+}
 
-- (void)restartFromStuck { if (NoDie); else %orig; }
+- (void)restartFromStuck {
+    if (NoDie) return;
+    %orig;
+}
 
 %end
 
 %hook Ruckus_GameObject
 
-- (BOOL)instantDeath { return NoDie ? NO : %orig; }
+- (BOOL)instantDeath {
+    return NoDie ? NO : %orig;
+}
 
-- (void)setInstantDeath:(BOOL)arg1 { if (NoDie) %orig(NO); else %orig; }
+- (void)setInstantDeath:(BOOL)death {
+    %orig(NoDie ? NO : death);
+}
 
 %end
 
 %end
-
 
 %group world
 
 %hook Ruckus_Ledge
 
 - (BOOL)isIcy {
-	if (Icy) return YES;
-	if (!Icy) return NO;
-	else return %orig; }
+    return Icy;
+}
 
 - (BOOL)isWorldEdge {
-	if (Icy) return NO;
-	if (!Icy) return YES;
-	else return %orig; }
+    return !Icy;
+}
 
 %end
 
 %end
-
 
 %group score
 
@@ -135,178 +175,245 @@ static BOOL NoJB;
 
 %end
 
-
 %group gameplay
 
 %hook AppDelegate
 
-- (BOOL)isMyTown2Installed { return HideMT2 ? YES : %orig; }
+- (BOOL)isMyTown2Installed {
+    return HideMT2 ? YES : %orig;
+}
 
 %end
 
 %hook Ruckus_ADManager
 
-- (void)start { if (NoPopUp); else %orig; }
-- (void)showAd { if (NoPopUp); else %orig; }
+- (void)start {
+    if (NoPopUp) return;
+    %orig;
+}
+
+- (void)showAd {
+    if (NoPopUp) return;
+    %orig;
+}
 
 %end
 
 %hook MPInterstitialAdController
 
-- (void)loadAD { if (NoPopUp); else %orig; }
+- (void)loadAD {
+    if (NoPopUp) return;
+    %orig;
+}
 
 %end
 
 %hook MPAdManager
 
-- (void)loadAdWithURL:(id)arg1 { if (NoPopUp); else %orig; }
-- (void)setAdView:(id)arg1 { if (NoPopUp); else %orig; }
-- (void)refreshAd { if (NoPopUp); else %orig; }
+- (void)loadAdWithURL:(id)arg1 {
+    if (NoPopUp) return;
+    %orig;
+}
+
+- (void)setAdView:(id)arg1 {
+    if (NoPopUp) return;
+    %orig;
+}
+
+- (void)refreshAd {
+    if (NoPopUp) return;
+    %orig;
+}
 
 %end
 
 %hook MRAdView
 
-- (id)initWithFrame:(CGRect)arg1 { return NoPopUp ? nil : %orig; }
-- (id)initWithFrame:(CGRect)arg1 allowsExpansion:(BOOL)arg2 closeButtonStyle:(unsigned int)arg3 placementType:(unsigned int)arg4 { return NoPopUp ? nil : %orig; }
+- (id)initWithFrame:(CGRect)frame {
+    return NoPopUp ? nil : %orig;
+}
+- (id)initWithFrame:(CGRect)frame allowsExpansion:(BOOL)arg2 closeButtonStyle:(unsigned int)arg3 placementType:(unsigned int)arg4 {
+    return NoPopUp ? nil : %orig;
+}
 
 %end
 
 %hook MRAdViewBrowsingController
 
-- (id)initWithAdView:(id)arg1 { return NoPopUp ? nil : %orig; }
+- (id)initWithAdView:(id)arg1 {
+    return NoPopUp ? nil : %orig;
+}
 
 %end
 
 %hook MRAdViewDisplayController
 
-- (id)view { return NoPopUp ? nil : %orig; }
-- (void)setView:(id)arg1 { if (NoPopUp); else %orig; }
+- (id)view {
+    return NoPopUp ? nil : %orig;
+}
+- (void)setView:(id)view {
+    if (NoPopUp) return;
+    %orig;
+}
 
 %end
 
 %hook Ruckus_Game
 
-- (BOOL)didWin { return AlwaysWin ? YES : %orig; }
+- (BOOL)didWin {
+    return AlwaysWin ? YES : %orig;
+}
 
-- (unsigned int)score { return FixedScore ? FixedScoreValue : %orig; }
+- (unsigned int)score {
+    return FixedScore ? FixedScoreValue : %orig;
+}
 
 %end
 
 %hook Ruckus_HUD
 
-- (void)showNoSwipes { if (UnlimitedSwipe); else %orig; }
+- (void)showNoSwipes {
+    if (UnlimitedSwipe) return;
+    %orig;
+}
 
 %end
 
 %hook Ruckus_CircleTimer
 
-- (BOOL)running { return PhoenixTimeFreeze ? NO : %orig; }
+- (BOOL)running {
+    return PhoenixTimeFreeze ? NO : %orig;
+}
 
-- (void)update:(float)arg1 { if (PhoenixTimeFreeze); else %orig; }
+- (void)update:(CGFloat)arg1 {
+    if (PhoenixTimeFreeze) return;
+    %orig;
+}
 
-- (void)start {	if (PhoenixTimeFreeze); else %orig; }
+- (void)start {
+    if (PhoenixTimeFreeze) return;
+    %orig;
+}
 
 %end
 
 %hook Ruckus_ZoneSelectBird
 
-- (void)jump { if (StaticBird); else %orig; }
+- (void)jump {
+    if (StaticBird) return;
+    %orig;
+}
 
-- (void)jumpDone { if (StaticBird); else %orig; }
+- (void)jumpDone {
+    if (StaticBird) return;
+    %orig;
+}
 
-- (void)land { if (StaticBird); else %orig; }
+- (void)land {
+    if (StaticBird) return;
+    %orig;
+}
 
-- (void)landDone { if (StaticBird); else %orig; }
+- (void)landDone {
+    if (StaticBird) return;
+    %orig;
+}
 
 %end
 
 %end
-
 
 %group system
 
 %hook CCDirector
 
-- (BOOL)displayFPS { return ShowFPS ? YES : %orig; }
+- (BOOL)displayFPS {
+    return ShowFPS ? YES : %orig;
+}
 
-- (void)setDisplayFPS:(BOOL)arg1 { if (ShowFPS) %orig(YES);	else %orig; }
+- (void)setDisplayFPS:(BOOL)fps {
+    %orig(ShowFPS ? YES : fps);
+}
 
 %end
 
 %hook TapjoyConnect
 
-- (BOOL)isJailBroken { return NoJB ? NO : %orig; }
+- (BOOL)isJailBroken {
+    return NoJB ? NO : %orig;
+}
 
 %end
 
 %hook FlurrySession
 
-+ (BOOL)deviceIsJailbroken { return NoJB ? NO : %orig; }
++ (BOOL)deviceIsJailbroken {
+    return NoJB ? NO : %orig;
+}
 
 %end
 
 %end
 
-static void loadHacks()
-{
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.PS.EarlyBirdHack.plist"];
-	id unlimitedswipe = [dict objectForKey:@"unlimitedSwipe"]; // mv
-	id nodie = [dict objectForKey:@"noDie"];
-	
-	id fixedscore = [dict objectForKey:@"fixedScore"];
-	int readFixedScoreValue = [dict objectForKey:@"fixedScoreValue"] ? [[dict objectForKey:@"fixedScoreValue"] integerValue] : 50000;
-	id multiplescore = [dict objectForKey:@"multipleScore"];
-	int readMultipleScoreValue = [dict objectForKey:@"multiplierValue"] ? [[dict objectForKey:@"multiplierValue"] integerValue] : 1;
-	
-	id icy = [dict objectForKey:@"iCy"];
-	
-	id phoenixtimefreeze = [dict objectForKey:@"phoenixTimeFreeze"];
-	id staticbird = [dict objectForKey:@"staticBird"];
-	id showfps = [dict objectForKey:@"showFPS"];
-	id alwayswin = [dict objectForKey:@"alwaysWin"];
-	id hidemt2 = [dict objectForKey:@"hideMT2"];
-	id nopopup = [dict objectForKey:@"noPopUp"];
-	
-	id nojb = [dict objectForKey:@"noJB"];
-	
-	UnlimitedSwipe = unlimitedswipe ? [unlimitedswipe boolValue] : YES;
-	NoDie = nodie ? [nodie boolValue] : YES;
-	
-	FixedScore = fixedscore ? [fixedscore boolValue] : YES;
-	if (readFixedScoreValue < 0)
-		readFixedScoreValue = 50000;
-	if (readFixedScoreValue != FixedScoreValue)
-		FixedScoreValue = readFixedScoreValue;
-	MultipleScore = multiplescore ? [multiplescore boolValue] : YES;
-	if (readMultipleScoreValue < 1)
-		readMultipleScoreValue = 1;
-	if (readMultipleScoreValue != m)
-		m = readMultipleScoreValue;
-	
-	Icy = icy ? [icy boolValue] : YES;
-	
-	PhoenixTimeFreeze = phoenixtimefreeze ? [phoenixtimefreeze boolValue] : YES;
-	StaticBird = staticbird ? [staticbird boolValue] : YES;
-	ShowFPS = showfps ? [showfps boolValue] : YES;
-	AlwaysWin = alwayswin ? [alwayswin boolValue] : YES;
-	HideMT2 = hidemt2 ? [hidemt2 boolValue] : YES;
-	NoPopUp = nopopup ? [nopopup boolValue] : YES;
-	
-	NoJB = nojb ? [nojb boolValue] : YES;
-
+static void loadHacks() {
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.PS.EarlyBirdHack.plist"];
+    id unlimitedswipe = [dict objectForKey:@"unlimitedSwipe"]; // mv
+    id nodie = [dict objectForKey:@"noDie"];
+    
+    id fixedscore = [dict objectForKey:@"fixedScore"];
+    int readFixedScoreValue = [dict objectForKey:@"fixedScoreValue"] ? [[dict objectForKey:@"fixedScoreValue"] integerValue] : 50000;
+    id multiplescore = [dict objectForKey:@"multipleScore"];
+    int readMultipleScoreValue = [dict objectForKey:@"multiplierValue"] ? [[dict objectForKey:@"multiplierValue"] integerValue] : 1;
+    
+    id icy = [dict objectForKey:@"iCy"];
+    
+    id phoenixtimefreeze = [dict objectForKey:@"phoenixTimeFreeze"];
+    id staticbird = [dict objectForKey:@"staticBird"];
+    id showfps = [dict objectForKey:@"showFPS"];
+    id alwayswin = [dict objectForKey:@"alwaysWin"];
+    id hidemt2 = [dict objectForKey:@"hideMT2"];
+    id nopopup = [dict objectForKey:@"noPopUp"];
+    
+    id nojb = [dict objectForKey:@"noJB"];
+    
+    UnlimitedSwipe = unlimitedswipe ? [unlimitedswipe boolValue] : YES;
+    NoDie = nodie ? [nodie boolValue] : YES;
+    
+    FixedScore = fixedscore ? [fixedscore boolValue] : YES;
+    if (readFixedScoreValue < 0)
+        readFixedScoreValue = 50000;
+    if (readFixedScoreValue != FixedScoreValue)
+        FixedScoreValue = readFixedScoreValue;
+    MultipleScore = multiplescore ? [multiplescore boolValue] : YES;
+    if (readMultipleScoreValue < 1)
+        readMultipleScoreValue = 1;
+    if (readMultipleScoreValue != m)
+        m = readMultipleScoreValue;
+    
+    Icy = icy ? [icy boolValue] : YES;
+    
+    PhoenixTimeFreeze = phoenixtimefreeze ? [phoenixtimefreeze boolValue] : YES;
+    StaticBird = staticbird ? [staticbird boolValue] : YES;
+    ShowFPS = showfps ? [showfps boolValue] : YES;
+    AlwaysWin = alwayswin ? [alwayswin boolValue] : YES;
+    HideMT2 = hidemt2 ? [hidemt2 boolValue] : YES;
+    NoPopUp = nopopup ? [nopopup boolValue] : YES;
+    
+    NoJB = nojb ? [nojb boolValue] : YES;
 }
 
-static void PostNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
-{
-	loadHacks();
+static void PostNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+    loadHacks();
 }
 
-%ctor
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, PostNotification, CFSTR("com.PS.EarlyBirdHack.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-	loadHacks();
-	[pool drain];
-	if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.booyah.birdswithfriends"]) { %init(bird); %init(world); %init(score); %init(gameplay); %init(system); }
+%ctor {
+    @autoreleasepool {
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, PostNotification, CFSTR("com.PS.EarlyBirdHack.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+        loadHacks();
+        %init(bird);
+        %init(world);
+        %init(score);
+        %init(gameplay);
+        %init(system);
+    }
 }

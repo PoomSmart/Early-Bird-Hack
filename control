@@ -5,5 +5,5 @@ Version: 1.0
 Architecture: iphoneos-arm
 Description: Hack Early Bird!
 Author: PoomSmart
-Section: iMods
-Icon: file:///Library/PreferenceBundles/EarlyBirdHackSettings.bundle/EBHack@2x.png
+Maintainer: PoomSmart
+Section: Hacks

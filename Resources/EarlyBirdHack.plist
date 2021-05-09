@@ -9,7 +9,7 @@
       <key>cell</key>
       <string>PSLinkCell</string>
       <key>icon</key>
-      <string>EBHack.png</string>
+      <string>icon.png</string>
       <key>label</key>
       <string>Early Bird Hack</string>
     </dict>
@@ -35,7 +35,7 @@
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-       <dict>
+      <dict>
         <key>cell</key>
         <string>PSSwitchCell</string>
         <key>default</key>
@@ -49,7 +49,7 @@
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-       <dict>
+      <dict>
         <key>cell</key>
         <string>PSGroupCell</string>
         <key>label</key>
@@ -72,25 +72,25 @@ You shouldn't set this too high.</string>
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-       <dict>
-		<key>cell</key>
-		<string>PSEditTextCell</string>
-		<key>detail</key>
-		<string>PSDetailController</string>
-		<key>defaults</key>
-		<string>com.PS.EarlyBirdHack</string>
-		<key>key</key>
-		<string>fixedScoreValue</string>
-		<key>label</key>
-		<string>Value</string>
-		<key>placeholder</key>
-		<string>Enter score</string>
-		<key>isNumeric</key>
-		<true/>
-		<key>PostNotification</key>
+      <dict>
+        <key>cell</key>
+        <string>PSEditTextCell</string>
+        <key>detail</key>
+        <string>PSDetailController</string>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>fixedScoreValue</string>
+        <key>label</key>
+        <string>Value</string>
+        <key>placeholder</key>
+        <string>Enter score</string>
+        <key>isNumeric</key>
+        <true/>
+        <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
-	   </dict>
-	   <dict>
+      </dict>
+      <dict>
         <key>cell</key>
         <string>PSSwitchCell</string>
         <key>default</key>
@@ -104,25 +104,25 @@ You shouldn't set this too high.</string>
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-       <dict>
-		<key>cell</key>
-		<string>PSEditTextCell</string>
-		<key>detail</key>
-		<string>PSDetailController</string>
-		<key>defaults</key>
-		<string>com.PS.EarlyBirdHack</string>
-		<key>key</key>
-		<string>multiplierValue</string>
-		<key>label</key>
-		<string>Value</string>
-		<key>placeholder</key>
-		<string>Enter multiplier</string>
-		<key>isNumeric</key>
-		<true/>
-		<key>PostNotification</key>
+      <dict>
+        <key>cell</key>
+        <string>PSEditTextCell</string>
+        <key>detail</key>
+        <string>PSDetailController</string>
+        <key>defaults</key>
+        <string>com.PS.EarlyBirdHack</string>
+        <key>key</key>
+        <string>multiplierValue</string>
+        <key>label</key>
+        <string>Value</string>
+        <key>placeholder</key>
+        <string>Enter multiplier</string>
+        <key>isNumeric</key>
+        <true/>
+        <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
-	   </dict>
-       <dict>
+      </dict>
+      <dict>
         <key>cell</key>
         <string>PSGroupCell</string>
         <key>label</key>
@@ -152,7 +152,7 @@ You shouldn't set this too high.</string>
 **For BlueBird in Zones select page.
 ***Will show at bottom-left of the screen.</string>
       </dict>
-       <dict>
+      <dict>
         <key>cell</key>
         <string>PSSwitchCell</string>
         <key>default</key>
@@ -194,7 +194,7 @@ You shouldn't set this too high.</string>
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-       <dict>
+      <dict>
         <key>cell</key>
         <string>PSSwitchCell</string>
         <key>default</key>
@@ -208,7 +208,7 @@ You shouldn't set this too high.</string>
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-        <dict>
+      <dict>
         <key>cell</key>
         <string>PSSwitchCell</string>
         <key>default</key>
@@ -222,7 +222,7 @@ You shouldn't set this too high.</string>
         <key>PostNotification</key>
         <string>com.PS.EarlyBirdHack.settingschanged</string>
       </dict>
-       <dict>
+      <dict>
         <key>cell</key>
         <string>PSSwitchCell</string>
         <key>default</key>
